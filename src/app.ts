@@ -1,4 +1,5 @@
 import {BasePixivAPI,type config} from "./base.ts"
+import {} from "ufo"
 
 type FILTER = "for_ios" | "";
 type TYPE = "illust" | "manga" | "";
@@ -32,12 +33,10 @@ type DURATION =
     "within_last_month" | 
     "" | 
     null;
-type BOOL = "true" | "false";
 
 export class PixivAPI extends BasePixivAPI {
     constructor(c: config) {
         super(c)
-
     }
     private authFetch(url: string, options: RequestInit = {}, auth: boolean = true): Promise<Response> {
         const headers = new Headers(options.headers)
@@ -55,5 +54,12 @@ export class PixivAPI extends BasePixivAPI {
             options.headers = headers
             return this.fetch(url, options)
         }
+    }
+    public user_detail(userid:string|number,filter: FILTER = "for_ios",auth:boolean = true): Promise<Response> {
+        const url = new URL(this.hosts + "/v1/user/detail");
+        url.searchParams.append("user_id", userid.toString());
+        url.searchParams.append("filter", filter);
+        
+        return this.authFetch(url.toString(), {},auth);
     }
 }
