@@ -6,8 +6,8 @@ type FetchLike = (
 ) => Promise<Response>;
 
 export interface config {
-    fetch: FetchLike;
-    hosts: string;
+    fetch?: FetchLike;
+    hosts?: string;
 }
 
 export class BasePixivAPI {
@@ -21,7 +21,7 @@ export class BasePixivAPI {
     public fetch: FetchLike;
     public headers: Headers = new Headers({})
 
-    constructor(c:config) {
+    constructor(c: config = {}) {
         this.userId = 0;
         this.hosts = c.hosts || "https://app-api.pixiv.net";
         this.fetch = c.fetch || fetch;
