@@ -8,6 +8,7 @@
   "license": "MIT",
   "imports": {
     "@std/crypto": "jsr:@std/crypto@^1.0.4",
+    "pathe": "npm:pathe@^2.0.3",
     "ufo": "npm:ufo@^1.5.4"
   }
 }
